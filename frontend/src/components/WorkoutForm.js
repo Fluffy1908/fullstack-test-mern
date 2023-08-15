@@ -1,8 +1,9 @@
 import { useState } from 'react'
-import { useWorkoutsContext } from "../hooks/useWorkoutsContext"
+import { useWorkoutsContext } from '../hooks/useWorkoutsContext'
 
 const WorkoutForm = () => {
   const { dispatch } = useWorkoutsContext()
+
   const [title, setTitle] = useState('')
   const [load, setLoad] = useState('')
   const [reps, setReps] = useState('')
@@ -28,13 +29,11 @@ const WorkoutForm = () => {
       setEmptyFields(json.emptyFields)
     }
     if (response.ok) {
+      setEmptyFields([])
       setError(null)
       setTitle('')
       setLoad('')
       setReps('')
-      setError(null)
-      setEmptyFields([])
-      console.log('new workout added:', json)
       dispatch({type: 'CREATE_WORKOUT', payload: json})
     }
 
@@ -64,7 +63,7 @@ const WorkoutForm = () => {
       <input 
         type="number" 
         onChange={(e) => setReps(e.target.value)} 
-        value={reps} 
+        value={reps}
         className={emptyFields.includes('reps') ? 'error' : ''}
       />
 
